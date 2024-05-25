@@ -17,7 +17,9 @@ app.get("/", (req, res) => {
     .catch((err) => {
       console.error(err);
     });
-  // res.render("home", { title: "Home page" }); // home est le fichier home.ejs . on fait comme si on etait dans le dossier views. donc on va directement a home.
+  // res.render("home", { title: "Home page" }); 
+  // home est le fichier home.ejs . 
+  //on fait comme si on etait dans le dossier views. donc on va directement a home.
 });
 
 app.get("/index.html", (req, res) => {
