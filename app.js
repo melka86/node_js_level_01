@@ -25,21 +25,28 @@ liveReloadServer.server.once("connection", () => {
 
 const MyData = require("./models/myDataSchema");
 
+// res.render("index", { title: "Home page" });
+// index est le fichier index.ejs .
+//on fait comme si on etait dans le dossier views. donc on va directement a home.
+
+// Home Page
 app.get("/", (req, res) => {
-  MyData.find()
-    .then((result) => {
-      res.render("home", { title: "Home page", posts: result });
-    })
-    .catch((err) => {
-      console.error(err);
-    });
-  // res.render("home", { title: "Home page" });
-  // home est le fichier home.ejs .
-  //on fait comme si on etait dans le dossier views. donc on va directement a home.
+  res.render("index", {});
 });
 
-app.get("/index.html", (req, res) => {
-  res.send("<h1>data sent correctly</h1> ");
+// Add user Page
+app.get("/user/add.html", (req, res) => {
+  res.render("user/add", {});
+});
+
+// View details user Page
+app.get("/user/view.html", (req, res) => {
+  res.render("user/view", {});
+});
+
+// Edit user Page
+app.get("/user/edit.html", (req, res) => {
+  res.render("user/edit", {});
 });
 
 mongoose
@@ -55,21 +62,3 @@ mongoose
     console.error("Failed to connect to MongoDB", err);
   });
 
-app.post("/", (req, res) => {
-  // console.log(req.body)
-  // const myData = new MyData (req.body);
-  const myData = new MyData({
-    userName: req.body.userName,
-    userEmail: req.body.userEmail,
-    userPassword: req.body.userPassword,
-  });
-
-  myData
-    .save()
-    .then(() => {
-      res.redirect("/index.html");
-    })
-    .catch((err) => {
-      console.error(err);
-    });
-});
